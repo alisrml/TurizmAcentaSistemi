@@ -1,5 +1,9 @@
+import view.AdminPanel;
+import view.LoginUI;
+
 public class App {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        //LoginUI loginUI = new LoginUI();
+        AdminPanel adminPanel = new AdminPanel();
     }
 }
