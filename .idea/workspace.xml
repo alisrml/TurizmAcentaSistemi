@@ -4,19 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d6efab7e-f508-4c4d-b1a6-42fa954ca7fe" name="Changes" comment="Database classı olusturuldu">
-      <change afterPath="$PROJECT_DIR$/src/business/UserController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/core/Helper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/dao/UserDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entity/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/view/AdminPanel.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/view/AdminPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/view/LoginUI.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/view/LoginUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/view/UserUI.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/view/UserUI.java" afterDir="false" />
+    <list default="true" id="d6efab7e-f508-4c4d-b1a6-42fa954ca7fe" name="Changes" comment="AdminPanel oluşturuldu. kullanıcı ekleme silme güncelleme, çıkış yapma işlemleri eklendi.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/business/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/business/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dao/UserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/UserDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/AdminPanel.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/AdminPanel.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/AdminPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/AdminPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,17 +36,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Ali/Documents/GitHub/TurizmAcentaSistemi/src/mysql-connector-j-8.4.0.jar&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH": "214",
+    "last_opened_file_path": "C:/Users/Ali/Documents/GitHub/SiparisYonetimSistemi",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Ali\Documents\GitHub\TurizmAcentaSistemi\src" />
@@ -74,11 +69,19 @@
       <option name="project" value="LOCAL" />
       <updated>1721302944500</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="AdminPanel oluşturuldu. kullanıcı ekleme silme güncelleme, çıkış yapma işlemleri eklendi.">
+      <created>1721433812588</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1721433812588</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Database classı olusturuldu" />
-    <option name="LAST_COMMIT_MESSAGE" value="Database classı olusturuldu" />
+    <MESSAGE value="AdminPanel oluşturuldu. kullanıcı ekleme silme güncelleme, çıkış yapma işlemleri eklendi." />
+    <option name="LAST_COMMIT_MESSAGE" value="AdminPanel oluşturuldu. kullanıcı ekleme silme güncelleme, çıkış yapma işlemleri eklendi." />
   </component>
 </project>

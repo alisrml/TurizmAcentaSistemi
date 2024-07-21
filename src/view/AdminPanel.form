@@ -79,7 +79,7 @@
             </constraints>
             <properties/>
           </component>
-          <component id="ca3b6" class="javax.swing.JButton" binding="btn_filter_user">
+          <component id="ca3b6" class="javax.swing.JButton" binding="btn_user_filter">
             <constraints>
               <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -87,7 +87,7 @@
               <text value="Arama Yap"/>
             </properties>
           </component>
-          <component id="c85a1" class="javax.swing.JButton" binding="btn_filter_reset_user">
+          <component id="c85a1" class="javax.swing.JButton" binding="btn_user_reset">
             <constraints>
               <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>

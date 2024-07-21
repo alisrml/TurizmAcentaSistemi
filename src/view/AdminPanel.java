@@ -20,8 +20,8 @@ public class AdminPanel extends JFrame {
     private JPanel pnl_filter_user;
     private JTextField fld_f_user_name;
     private JComboBox cmb_f_user_type;
-    private JButton btn_filter_user;
-    private JButton btn_filter_reset_user;
+    private JButton btn_user_filter;
+    private JButton btn_user_reset;
     private JButton btn_user_new;
     private JButton btn_logout;
     private UserController userController;
@@ -42,6 +42,8 @@ public class AdminPanel extends JFrame {
         loadUserTable(null);
         loadUserPopupMenu();
         LoadUserButtonEvent();
+        this.cmb_f_user_type.setModel(new DefaultComboBoxModel(User.TYPE.values()));
+        this.cmb_f_user_type.setSelectedItem(null);
 
         this.add(container);
         this.setTitle("Turizm Acenta Sistemi");
@@ -63,6 +65,17 @@ public class AdminPanel extends JFrame {
                     loadUserTable(null);
                 }
             });
+        });
+
+        this.btn_user_filter.addActionListener(e -> {
+            ArrayList<User> filteredUsers = this.userController.filter(this.fld_f_user_name.getText(),(User.TYPE) this.cmb_f_user_type.getSelectedItem());
+            loadUserTable(filteredUsers);
+        });
+
+        this.btn_user_reset.addActionListener(e -> {
+            loadUserTable(null);
+            this.fld_f_user_name.setText(null);
+            this.cmb_f_user_type.setSelectedItem(null);
         });
     }
 

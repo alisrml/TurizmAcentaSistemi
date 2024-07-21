@@ -36,4 +36,21 @@ public class UserController {
     public User getByID(int id) {
         return this.userDao.getByID(id);
     }
+
+    public ArrayList<User> filter(String name, User.TYPE type) {
+        String query = "SELECT * FROM user";
+
+        ArrayList<String> whereList = new ArrayList<>();
+
+        if(name.length()>0){whereList.add("name LIKE '%"+name+"%'");}
+
+        if(type!=null){whereList.add("type = '"+type+"'");}
+
+        if(whereList.size()>0){
+            String whereQuery = String.join(" AND ",whereList);
+            query += " WHERE "+whereQuery;
+        }
+
+        return  this.userDao.query(query);
+    }
 }

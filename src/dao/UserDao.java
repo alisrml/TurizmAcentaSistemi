@@ -113,4 +113,19 @@ public class UserDao {
         }
         return user;
     }
+
+    public ArrayList<User> query(String query){
+        ArrayList<User> users= new ArrayList<>();
+
+        try {
+            ResultSet rs = this.connection.createStatement().executeQuery(query);
+            while (rs.next()){
+                users.add(this.match(rs));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return users;
+    }
 }
