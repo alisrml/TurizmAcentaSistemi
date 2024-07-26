@@ -37,9 +37,11 @@ public class HotelController {
         return this.hotelDao.getById(id);
     }
 
+    public Hotel getByName(String name){return this.hotelDao.getByName(name);}
+
     public boolean delete(int id) {
         if(this.getById(id) == null){
-            Helper.showMsg(id + "ID kayıtlı oyel bulunamadı!");
+            Helper.showMsg(id + "ID kayıtlı otel bulunamadı!");
             return false;
         }
         return this.hotelDao.delete(id);

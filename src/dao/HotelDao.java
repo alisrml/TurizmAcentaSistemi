@@ -87,6 +87,22 @@ public class HotelDao {
         return hotel;
     }
 
+    public Hotel getByName(String name){
+        Hotel hotel = null;
+        String query = "SELECT * FROM hotel WHERE name LIKE'%"+ name+"%'";
+
+        try {
+            PreparedStatement pr = this.connection.prepareStatement(query);
+            ResultSet rs = pr.executeQuery();
+            if(rs.next()){
+                hotel = this.match(rs);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return hotel;
+    }
+
     public boolean delete(int id) {
         String query = "DELETE FROM hotel WHERE id = ?";
         try {

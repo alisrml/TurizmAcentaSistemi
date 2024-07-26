@@ -1,15 +1,15 @@
 import entity.Hotel;
-import view.AdminPanel;
-import view.EmployeePanel;
-import view.HotelUI;
-import view.LoginUI;
+import entity.Room;
+import view.*;
 
 public class App {
     public static void main(String[] args) {
         //LoginUI loginUI = new LoginUI();
         EmployeePanel employeePanel = new EmployeePanel();
+        //RoomUI roomUI = new RoomUI(new Room());
         //Admin panelinde bulunan filtreleme seçenekleri yazılacak.
         //bu şekilde admin paneli tamamlanıyor.
 
     }
 }
+

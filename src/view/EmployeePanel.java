@@ -1,9 +1,11 @@
 package view;
 
 import business.HotelController;
+import business.RoomController;
 import core.Helper;
 import entity.Hotel;
 import entity.PensionType;
+import entity.Room;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -26,12 +28,26 @@ public class EmployeePanel extends JFrame {
     private JButton btn_otel_reset;
     private JButton btn_otel_new;
     private JButton btn_logout;
+    private JPanel pnl_room;
+    private JTable tbl_room;
+    private JScrollPane scrll_room;
+    private JPanel Rezervasyon;
+    private JTextField fld_room_filter;
+    private JButton btn_room_filter;
+    private JButton btn_room_reset;
+    private JButton btn_room_new;
+    private JPanel pnl_room_filter;
+    private JTable table1;
     private HotelController hotelController;
+    private RoomController roomController;
     private DefaultTableModel tmdl_hotel = new DefaultTableModel();
+    private DefaultTableModel tmdl_room = new DefaultTableModel();
     private  JPopupMenu popup_hotel = new JPopupMenu();
+    private  JPopupMenu popup_room = new JPopupMenu();
 
     public EmployeePanel(){
         this.hotelController = new HotelController();
+        this.roomController = new RoomController();
 
         this.add(container);
         this.setTitle("Turizm Acenta Sistemi");
@@ -51,12 +67,114 @@ public class EmployeePanel extends JFrame {
         });
 
         //HOTEL TAB
-        //yapılacaklar
-        //otel ekleme, düzenleme
         loadHotelTable(null);
         loadHotelPopupMenu();
         loadHotelButtonEvent();
 
+        //ROOM TAB
+        loadRoomTable(null);
+        loadRoomPopupMenu();
+        loadRoomButtonEvent();
+
+
+    }
+
+    private void loadRoomPopupMenu(){
+        this.tbl_room.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                int selectedRow = tbl_room.rowAtPoint(e.getPoint());
+                tbl_room.setRowSelectionInterval(selectedRow,selectedRow);
+            }
+        });
+
+        this.popup_room.add("Güncelle").addActionListener(e -> {
+            int selectId = Integer.parseInt(tbl_room.getValueAt(tbl_room.getSelectedRow(),0).toString());
+            RoomUI roomUI = new RoomUI(this.roomController.getById(selectId));
+            roomUI.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    loadRoomTable(null);
+                }
+            });
+        });
+
+        this.popup_room.add("Sil").addActionListener(e -> {
+            int selectId = Integer.parseInt(tbl_room.getValueAt(tbl_room.getSelectedRow(),0).toString());
+            if(Helper.confirm("sure")){
+                if(this.roomController.delete(selectId)){
+                    Helper.showMsg("done");
+                    loadRoomTable(null);
+                }else {
+                    Helper.showMsg("error");
+                }
+            }
+        });
+
+        this.tbl_room.setComponentPopupMenu(popup_room);
+
+    }
+
+    private void loadRoomButtonEvent(){
+        this.btn_room_filter.addActionListener(e -> {
+            ArrayList<Room> filteredRooms = this.roomController.filter(this.fld_room_filter.getText());
+            loadRoomTable(filteredRooms);
+        });
+
+        this.btn_room_reset.addActionListener(e -> {
+            this.fld_room_filter.setText(null);
+            loadRoomTable(null);
+        });
+        this.btn_room_new.addActionListener(e -> {
+            RoomUI roomUI = new RoomUI(new Room());
+            roomUI.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    loadRoomTable(null);
+                }
+            });
+        });
+    }
+
+    private void loadRoomTable(ArrayList<Room> rooms){
+        Object[] columnRoom = {"ID","Otel Adı","Pansiyon Tipi","Sezon","Yetişkin Fiyat","Çocuk Fiyat","Kapasite","Özellikler","Stok"};
+
+        if(rooms == null){
+            rooms = this.roomController.findAll();
+        }
+
+        //tablo sıfırlama
+        DefaultTableModel clearModel = (DefaultTableModel) this.tbl_room.getModel();
+        clearModel.setRowCount(0);
+
+        this.tmdl_room.setColumnIdentifiers(columnRoom);
+        for(Room room :rooms){
+            StringBuilder stf = new StringBuilder();
+            if(room.isTv()){stf.append("TV ");}
+            if(room.isMinibar()){stf.append("Minibar ");}
+            StringBuilder seasonDate = new StringBuilder();
+            seasonDate.append(room.getSeason().getStart_date());
+            seasonDate.append("/");
+            seasonDate.append(room.getSeason().getEnd_date());
+
+            Object[] rowObject = {
+                    room.getId(),
+                    room.getHotel().getName(),
+                    room.getPensionType().getName(),
+                    seasonDate,
+                    room.getAdultPrice(),
+                    room.getKidPrice(),
+                    room.getCapacity(),
+                    stf,
+                    room.getStock()
+            };
+            this.tmdl_room.addRow(rowObject);
+        }
+
+        this.tbl_room.setModel(tmdl_room);
+        this.tbl_room.getTableHeader().setReorderingAllowed(false);
+        this.tbl_room.getColumnModel().getColumn(0).setMaxWidth(50);
+        this.tbl_room.setEnabled(false);
     }
 
     private void loadHotelButtonEvent() {
@@ -79,7 +197,6 @@ public class EmployeePanel extends JFrame {
             hotelUI.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    dispose();
                     loadHotelTable(null);
                 }
             });
