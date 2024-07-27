@@ -2,10 +2,12 @@ package view;
 
 import business.HotelController;
 import business.RoomController;
+import business.SeasonController;
 import core.Helper;
 import entity.Hotel;
 import entity.PensionType;
 import entity.Room;
+import entity.Season;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -37,17 +39,27 @@ public class EmployeePanel extends JFrame {
     private JButton btn_room_reset;
     private JButton btn_room_new;
     private JPanel pnl_room_filter;
-    private JTable table1;
+    private JTable tbl_season;
+    private JPanel pnl_season_filter;
+    private JTextField fld_season_filter;
+    private JButton btn_season_filter;
+    private JButton btn_season_reset;
+    private JButton btn_season_new;
+    private JScrollPane scrll_season;
     private HotelController hotelController;
     private RoomController roomController;
+    private SeasonController seasonController;
     private DefaultTableModel tmdl_hotel = new DefaultTableModel();
     private DefaultTableModel tmdl_room = new DefaultTableModel();
+    private DefaultTableModel tmdl_season = new DefaultTableModel();
     private  JPopupMenu popup_hotel = new JPopupMenu();
     private  JPopupMenu popup_room = new JPopupMenu();
+    private JPopupMenu popup_season = new JPopupMenu();
 
     public EmployeePanel(){
         this.hotelController = new HotelController();
         this.roomController = new RoomController();
+        this.seasonController = new SeasonController();
 
         this.add(container);
         this.setTitle("Turizm Acenta Sistemi");
@@ -76,7 +88,101 @@ public class EmployeePanel extends JFrame {
         loadRoomPopupMenu();
         loadRoomButtonEvent();
 
+        //SEASON TAB
+        loadSeasonTable(null);
+        loadSeasonPopupMenu();
+        loadSeasonButtonEvent();
 
+        //RESERVATION TAB
+
+
+    }
+
+    private void loadSeasonPopupMenu(){
+        this.tbl_season.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                int selectedRow = tbl_season.rowAtPoint(e.getPoint());
+                tbl_season.setRowSelectionInterval(selectedRow,selectedRow);
+            }
+        });
+
+        this.popup_season.add("Güncelle").addActionListener(e -> {
+            int selectId = Integer.parseInt(tbl_season.getValueAt(tbl_season.getSelectedRow(),0).toString());
+            SeasonUI seasonUI = new SeasonUI(this.seasonController.getById(selectId));
+            seasonUI.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    loadSeasonTable(null);
+                    loadRoomTable(null);
+                }
+            });
+        });
+
+        this.popup_season.add("Sil").addActionListener(e -> {
+            int selectId = Integer.parseInt(tbl_season.getValueAt(tbl_season.getSelectedRow(),0).toString());
+            if(Helper.confirm("sure")){
+                if(this.seasonController.delete(selectId)){
+                    Helper.showMsg("done");
+                    loadSeasonTable(null);
+                }else {
+                    Helper.showMsg("error");
+                }
+            }
+        });
+
+        this.tbl_season.setComponentPopupMenu(popup_season);
+    }
+
+    private void loadSeasonButtonEvent(){
+        this.btn_season_filter.addActionListener(e -> {
+            ArrayList<Season> filteredSeasons= this.seasonController.filter(this.fld_season_filter.getText());
+            loadSeasonTable(filteredSeasons);
+        });
+
+        this.btn_season_reset.addActionListener(e -> {
+            this.fld_season_filter.setText(null);
+            loadSeasonTable(null);
+        });
+
+        this.btn_season_new.addActionListener(e -> {
+            SeasonUI seasonUI = new SeasonUI(new Season());
+            seasonUI.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    loadSeasonTable(null);
+                }
+            });
+        });
+    }
+
+    private void loadSeasonTable(ArrayList<Season> seasons){
+        Object[] columnSeason = {"ID","Otel Adı","Başlangıç Tarihi","Bitiş Tarihi"};
+
+        if(seasons == null){
+            seasons = this.seasonController.findAll();
+        }
+
+        //tablo sıfırlama
+        DefaultTableModel clearModel = (DefaultTableModel) this.tbl_season.getModel();
+        clearModel.setRowCount(0);
+
+        this.tmdl_season.setColumnIdentifiers(columnSeason);
+        for(Season season: seasons){
+            Hotel hotel = hotelController.getById(season.getHotel_id());
+            Object[] rowObject = {
+                    season.getId(),
+                    hotel.getName(),
+                    season.getStart_date().toString(),
+                    season.getEnd_date().toString()
+            };
+            this.tmdl_season.addRow(rowObject);
+        }
+
+        this.tbl_season.setModel(tmdl_season);
+        this.tbl_season.getTableHeader().setReorderingAllowed(false);
+        this.tbl_season.getColumnModel().getColumn(0).setMaxWidth(50);
+        this.tbl_season.setEnabled(false);
     }
 
     private void loadRoomPopupMenu(){
@@ -120,6 +226,7 @@ public class EmployeePanel extends JFrame {
             ArrayList<Room> filteredRooms = this.roomController.filter(this.fld_room_filter.getText());
             loadRoomTable(filteredRooms);
         });
+
 
         this.btn_room_reset.addActionListener(e -> {
             this.fld_room_filter.setText(null);

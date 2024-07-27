@@ -77,4 +77,77 @@ public class SeasonDao {
         }
         return season;
     }
+
+    public ArrayList<Season> findAll() {
+        ArrayList<Season>  seasons= new ArrayList<>();
+        String query = "SELECT * FROM season";
+
+        try {
+            ResultSet rs = this.connection.createStatement().executeQuery(query);
+            while (rs.next()){
+                seasons.add(this.match(rs));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return seasons;
+    }
+
+    public ArrayList<Season> query(String query) {
+        ArrayList<Season> seasons = new ArrayList<>();
+
+        try {
+            ResultSet rs = this.connection.createStatement().executeQuery(query);
+            while (rs.next()){
+                seasons.add(this.match(rs));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return seasons;
+    }
+
+    public boolean delete(int id) {
+        String query = "DELETE FROM season WHERE id = ?";
+
+        try {
+            PreparedStatement pr = this.connection.prepareStatement(query);
+            pr.setInt(1,id);
+            return pr.executeUpdate() != -1;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public boolean save(Season season) {
+        String query = "INSERT INTO season (id,hotel_id,start_date,end_date) VALUES (?,?,?,?)";
+
+        try {
+            PreparedStatement pr = this.connection.prepareStatement(query);
+            pr.setInt(1,season.getId());
+            pr.setInt(2,season.getHotel_id());
+            pr.setDate(3, Date.valueOf(season.getStart_date()));
+            pr.setDate(4, Date.valueOf(season.getEnd_date()));
+
+            return pr.executeUpdate() != -1;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public boolean update(Season season) {
+        String query = "UPDATE season SET hotel_id = ?,start_date = ?,end_date = ? WHERE id = ?";
+
+        try {
+            PreparedStatement pr = this.connection.prepareStatement(query);
+            pr.setInt(1,season.getHotel_id());
+            pr.setDate(2, Date.valueOf(season.getStart_date()));
+            pr.setDate(3, Date.valueOf(season.getEnd_date()));
+            pr.setInt(4,season.getId());
+
+            return pr.executeUpdate() != -1;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
