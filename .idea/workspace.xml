@@ -4,13 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d6efab7e-f508-4c4d-b1a6-42fa954ca7fe" name="Changes" comment="Oda oluşturma güncelleme işlemleri gerçekleştirildi.">
-      <change afterPath="$PROJECT_DIR$/src/view/SeasonUI.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/view/SeasonUI.java" afterDir="false" />
+    <list default="true" id="d6efab7e-f508-4c4d-b1a6-42fa954ca7fe" name="Changes" comment="Season işlemleri gerçekleştirildi.">
+      <change afterPath="$PROJECT_DIR$/src/business/ReservationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/dao/ReservationDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/entity/Reservation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/view/ReservationUI.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/view/ReservationUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/business/SeasonController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/business/SeasonController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dao/SeasonDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/SeasonDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/EmployeePanel.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/EmployeePanel.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/EmployeePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/EmployeePanel.java" afterDir="false" />
     </list>
@@ -38,19 +38,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH": "196",
-    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH": "214",
-    "last_opened_file_path": "C:/Users/Ali/Documents/GitHub/SiparisYonetimSistemi",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH&quot;: &quot;196&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH&quot;: &quot;214&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Ali/Documents/GitHub/SiparisYonetimSistemi&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Ali\Documents\GitHub\TurizmAcentaSistemi\src" />
@@ -100,7 +100,14 @@
       <option name="project" value="LOCAL" />
       <updated>1722025830371</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Season işlemleri gerçekleştirildi.">
+      <created>1722111256190</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1722111256190</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -109,7 +116,8 @@
     <MESSAGE value="AdminPanelde filtreleme işlemleri eklendi" />
     <MESSAGE value="Employee Panel Oluşturuldu. Otel ekleme silme güncelleme işlemleri eklendi." />
     <MESSAGE value="Oda oluşturma güncelleme işlemleri gerçekleştirildi." />
-    <option name="LAST_COMMIT_MESSAGE" value="Oda oluşturma güncelleme işlemleri gerçekleştirildi." />
+    <MESSAGE value="Season işlemleri gerçekleştirildi." />
+    <option name="LAST_COMMIT_MESSAGE" value="Season işlemleri gerçekleştirildi." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

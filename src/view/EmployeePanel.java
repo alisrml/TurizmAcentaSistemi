@@ -1,13 +1,11 @@
 package view;
 
 import business.HotelController;
+import business.ReservationController;
 import business.RoomController;
 import business.SeasonController;
 import core.Helper;
-import entity.Hotel;
-import entity.PensionType;
-import entity.Room;
-import entity.Season;
+import entity.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -46,12 +44,16 @@ public class EmployeePanel extends JFrame {
     private JButton btn_season_reset;
     private JButton btn_season_new;
     private JScrollPane scrll_season;
+    private JTable tbl_reservation;
+    private JScrollPane scrll_reservation;
     private HotelController hotelController;
     private RoomController roomController;
     private SeasonController seasonController;
+    private ReservationController reservationController;
     private DefaultTableModel tmdl_hotel = new DefaultTableModel();
     private DefaultTableModel tmdl_room = new DefaultTableModel();
     private DefaultTableModel tmdl_season = new DefaultTableModel();
+    private DefaultTableModel tmdl_reservation = new DefaultTableModel();
     private  JPopupMenu popup_hotel = new JPopupMenu();
     private  JPopupMenu popup_room = new JPopupMenu();
     private JPopupMenu popup_season = new JPopupMenu();
@@ -60,6 +62,7 @@ public class EmployeePanel extends JFrame {
         this.hotelController = new HotelController();
         this.roomController = new RoomController();
         this.seasonController = new SeasonController();
+        this.reservationController = new ReservationController();
 
         this.add(container);
         this.setTitle("Turizm Acenta Sistemi");
@@ -94,10 +97,40 @@ public class EmployeePanel extends JFrame {
         loadSeasonButtonEvent();
 
         //RESERVATION TAB
-
+        loadReservationTable(null);
 
     }
+    public void loadReservationTable(ArrayList<Reservation> reservations){
+        Object[] columnReservation = {"ID","Müşteri Adı","Müşteri Telefon","Giriş Tarihi","Çıkış Tarihi","Yetişkin Sayısı","Çocuk Sayısı","Toplam Fiyat"};
 
+        if(reservations == null){
+            reservations = this.reservationController.findAll();
+        }
+
+        //tablo sıfırlama
+        DefaultTableModel clearModel = (DefaultTableModel) this.tbl_reservation.getModel();
+        clearModel.setRowCount(0);
+
+        this.tmdl_reservation.setColumnIdentifiers(columnReservation);
+        for(Reservation res:reservations){
+            Object[] rowObject = {
+                    res.getId(),
+                    res.getCustomer_name(),
+                    res.getCustomer_contact(),
+                    res.getCheck_in_date(),
+                    res.getCheck_out_date(),
+                    res.getAdults(),
+                    res.getChildren(),
+                    res.getTotal_price()
+            };
+            this.tmdl_reservation.addRow(rowObject);
+        }
+
+        this.tbl_reservation.setModel(tmdl_reservation);
+        this.tbl_reservation.getTableHeader().setReorderingAllowed(false);
+        this.tbl_reservation.getColumnModel().getColumn(0).setMaxWidth(50);
+        this.tbl_reservation.setEnabled(false);
+    }
     private void loadSeasonPopupMenu(){
         this.tbl_season.addMouseListener(new MouseAdapter() {
             @Override
@@ -215,6 +248,20 @@ public class EmployeePanel extends JFrame {
                     Helper.showMsg("error");
                 }
             }
+        });
+
+        this.popup_room.add("Rezervasyon Yap").addActionListener(e -> {
+            int selectId = Integer.parseInt(tbl_room.getValueAt(tbl_room.getSelectedRow(),0).toString());
+            Reservation reservation = new Reservation();
+            reservation.setRoom_id(selectId);
+            ReservationUI reservationUI = new ReservationUI(reservation);
+            reservationUI.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    loadRoomTable(null);
+                    loadReservationTable(null);
+                }
+            });
         });
 
         this.tbl_room.setComponentPopupMenu(popup_room);
