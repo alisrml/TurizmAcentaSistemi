@@ -64,6 +64,7 @@ public class ReservationUI extends JFrame {
         lbl_room_type.setText(String.valueOf(room.getType()));
         lbl_pension_type.setText(room.getPensionType().getName());
         lbl_rez_capacity.setText("Yatak Sayısı:"+String.valueOf(room.getBed()));
+        room.setStock(room.getStock()-1);
 
         btn_calc_price.addActionListener(e -> {lbl_total_price.setText("Fiyat: "+String.valueOf(roomPriceCalc()));});
 
@@ -85,9 +86,9 @@ public class ReservationUI extends JFrame {
                 this.reservation.setTotal_price(roomPriceCalc());
 
                 if(this.reservation.getId() == 0){
-                    result = this.reservationController.save(this.reservation);
+                    result = this.reservationController.save(this.reservation) && roomController.update(room);
                 }else {
-                    result = this.reservationController.update(this.reservation);
+                    result = this.reservationController.update(this.reservation) && roomController.update(room);
                 }
 
                 if(result){

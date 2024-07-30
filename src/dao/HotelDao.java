@@ -1,5 +1,7 @@
 package dao;
 
+import business.RoomController;
+import business.SeasonController;
 import core.Database;
 import entity.Hotel;
 import entity.PensionType;
@@ -13,7 +15,6 @@ import java.util.Arrays;
 
 public class HotelDao {
     private Connection connection = Database.getInstance();
-    
     public ArrayList<Hotel> findAll() {
         ArrayList<Hotel> hotels = new ArrayList<>();
         String query = "SELECT * FROM hotel";

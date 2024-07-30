@@ -26,7 +26,11 @@ public class ReservationController {
         return this.reservationDao.update(reservation);
     }
 
-    private Reservation getById(int id) {
+    public Reservation getById(int id) {
         return reservationDao.getById(id);
+    }
+
+    public boolean delete(int selectId) {
+        return reservationDao.delete(selectId);
     }
 }

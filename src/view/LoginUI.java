@@ -47,9 +47,9 @@ public class LoginUI extends JFrame {
                     System.out.println(user.toString());
                     this.dispose();
                     if(user.getType() == User.TYPE.ADMIN){
-                        //giris yapan kullanici admin olma durumu admin paneli acilacak.
+                        AdminPanel adminPanel = new AdminPanel();
                     }else {
-                        //giris yapan kullanici employee olma durumu employee paneli acilacak.
+                        EmployeePanel employeePanel = new EmployeePanel();
                     }
                 }
             }

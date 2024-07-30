@@ -57,6 +57,7 @@ public class EmployeePanel extends JFrame {
     private  JPopupMenu popup_hotel = new JPopupMenu();
     private  JPopupMenu popup_room = new JPopupMenu();
     private JPopupMenu popup_season = new JPopupMenu();
+    private JPopupMenu popup_reservation = new JPopupMenu();
 
     public EmployeePanel(){
         this.hotelController = new HotelController();
@@ -98,6 +99,7 @@ public class EmployeePanel extends JFrame {
 
         //RESERVATION TAB
         loadReservationTable(null);
+        loadReservationPopupMenu();
 
     }
     public void loadReservationTable(ArrayList<Reservation> reservations){
@@ -130,6 +132,41 @@ public class EmployeePanel extends JFrame {
         this.tbl_reservation.getTableHeader().setReorderingAllowed(false);
         this.tbl_reservation.getColumnModel().getColumn(0).setMaxWidth(50);
         this.tbl_reservation.setEnabled(false);
+    }
+
+    private void loadReservationPopupMenu(){
+        this.tbl_reservation.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                int selectedRow = tbl_reservation.rowAtPoint(e.getPoint());
+                tbl_reservation.setRowSelectionInterval(selectedRow,selectedRow);
+            }
+        });
+
+        this.popup_reservation.add("Güncelle").addActionListener(e -> {
+            int selectId = Integer.parseInt(tbl_reservation.getValueAt(tbl_reservation.getSelectedRow(),0).toString());
+            ReservationUI reservationUI = new ReservationUI(this.reservationController.getById(selectId));
+            reservationUI.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    loadReservationTable(null);
+                }
+            });
+        });
+
+        this.popup_reservation.add("Sil").addActionListener(e -> {
+            int selectId = Integer.parseInt(tbl_reservation.getValueAt(tbl_reservation.getSelectedRow(),0).toString());
+            if(Helper.confirm("sure")){
+                if(this.reservationController.delete(selectId)){
+                    Helper.showMsg("done");
+                    loadReservationTable(null);
+                }else {
+                    Helper.showMsg("error");
+                }
+            }
+        });
+
+        this.tbl_reservation.setComponentPopupMenu(popup_reservation);
     }
     private void loadSeasonPopupMenu(){
         this.tbl_season.addMouseListener(new MouseAdapter() {

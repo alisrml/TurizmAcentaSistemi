@@ -97,4 +97,17 @@ public class ReservationDao {
             throw new RuntimeException(e);
         }
     }
+
+    public boolean delete(int id){
+        String query = "DELETE reservation WHERE id = ?";
+
+        try {
+            PreparedStatement pr = this.connection.prepareStatement(query);
+            pr.setInt(1,id);
+            return pr.executeUpdate() != -1;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
