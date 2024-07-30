@@ -35,9 +35,9 @@ public class UserUI extends JFrame{
         this.cmb_user_type.setModel(new DefaultComboBoxModel<>(User.TYPE.values()));
         
         if(this.user.getId() ==0){
-            this.lbl_title.setText("Müşteri Ekle");
+            this.lbl_title.setText("Kullanıcı Ekle");
         }else {
-            this.lbl_title.setText("Müşteri Güncelle");
+            this.lbl_title.setText("Kullanıcı Güncelle");
             this.fld_user_name.setText(this.user.getName());
             this.fld_user_mail.setText(this.user.getEmail());
             this.fld_user_password.setText(this.user.getPassword());
