@@ -6,7 +6,7 @@ Proje Admin kullanıcısı ile çalışan ekleme, Çalışan kullanıcısı ile 
 
 ## Login Ekranı
 
-![1.JPG](Turizm%20Acenta%20Sistemi%20b94086ed3f114358a4ffa2ab6962d8da/1.jpg)
+![1.JPG](TurizmAcentaSistemiReadme/1.jpg)
 
 Login ekranında kullanıcıdan mail adresi ve şifre bilgileri istenmektedir. Kullanıcının girdiği bilgilere göre mysql database üzerinde kullanıcı araması yapılır. Kullanıcı bulunamadı ise hata verilir. Bulundu ise bulunan kullanıcının tipine(ADMIN,EMPLOYEE) göre giriş işlemi gerçekleşir.
 
@@ -14,11 +14,11 @@ Login ekranında kullanıcıdan mail adresi ve şifre bilgileri istenmektedir. K
 
 Admin Panelde kullanıcılar listelenir. Kullanıcı arama ve ekleme işlemleri burada gerçekleştirilebilir. Kullanıcıların üzerine sağ tıklanarak güncelleme ya da silme işlemleri gerçekleştirilebilir.
 
-![2.JPG](Turizm%20Acenta%20Sistemi%20b94086ed3f114358a4ffa2ab6962d8da/2.jpg)
+![2.JPG](TurizmAcentaSistemiReadme/2.jpg)
 
 ## Kullanıcı Ekleme Ekranı
 
-![3.JPG](Turizm%20Acenta%20Sistemi%20b94086ed3f114358a4ffa2ab6962d8da/3.jpg)
+![3.JPG](TurizmAcentaSistemiReadme/3.jpg)
 
 # Employee Panel
 
@@ -28,8 +28,8 @@ Oda panelinde ise oda seçilip sağ tıklanarak rezervasyon yapma işlemi gerçe
 
 Ekleme ve Güncelleme ekranları aynı yapıya sahiptir. Güncelleme sırasında fieldlarda bulunan veriler mevcut nesneden alınarak doldurulur ve yapılan değişikler sonrası nesneye aktarılır ve oradan veritabanına işlenir. Ekleme işleminde ise fieldlar boştur ve girilen bilgilere göre nesneye bilgiler atanır ve veritabanına işlenir.
 
-![4.JPG](Turizm%20Acenta%20Sistemi%20b94086ed3f114358a4ffa2ab6962d8da/4.jpg)
+![4.JPG](TurizmAcentaSistemiReadme/4.jpg)
 
 ## Rezervasyon Güncelleme Ekranı
 
-![5.JPG](Turizm%20Acenta%20Sistemi%20b94086ed3f114358a4ffa2ab6962d8da/5.jpg)
+![5.JPG](TurizmAcentaSistemiReadme/5.jpg)
